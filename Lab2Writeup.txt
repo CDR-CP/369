@@ -1,0 +1,13 @@
+mapper input types: (LongWritable, Text)
+mapper output types: (Text, IntWritable)
+reducer input types: (Text, IntWritable)
+reducer output types: (Text, IntWritable)
+
+mapper extracts date from each record returns (date, 1)
+reducersums values for each date to calc total sales
+
+Java implementation was faster beacuse it avoids using Hadoop 
+MapReduce is slower for small data but scales better
+Combiner improved performance 
+
+both implementations give same result
