@@ -1,0 +1,31 @@
+from pypandoc import convert_text
+
+readme = """# Lab 2 – Sales By Day (Simple)
+
+## Compile
+javac SalesByDayJava.java
+javac -classpath "$(hadoop classpath)" -d . SalesByDay.java
+jar -cvf lab2.jar *.class
+
+## Run Java Version
+java SalesByDayJava sales.txt java_output.txt
+
+## Run Hadoop Version
+rm -rf output
+hadoop jar lab2.jar SalesByDay sales.txt output
+
+## Run Hadoop (with combiner)
+rm -rf output_combiner
+hadoop jar lab2.jar SalesByDay sales.txt output_combiner combiner
+
+## View Results
+cat output/part-r-00000
+cat java_output.txt
+
+## Check Match
+diff output/part-r-00000 java_output.txt
+"""
+
+convert_text(readme, 'md', format='md', outputfile='/mnt/data/README_simple.md', extra_args=['--standalone'])
+
+"/mnt/data/README_simple.md"

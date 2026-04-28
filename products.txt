@@ -1,0 +1,100 @@
+1, iPhone 15 Pro, 999.99
+2, Samsung Galaxy S24, 849.99
+3, Google Pixel 8, 699.99
+4, iPad Air 11", 599.99
+5, iPad Mini, 499.99
+6, MacBook Air M3, 1099.99
+7, MacBook Pro 14", 1999.99
+8, Dell XPS 13, 1299.99
+9, HP Spectre x360, $1149.99
+10, Lenovo ThinkPad X1, 1399.99
+11,  Microsoft Surface Pro, 1099.99
+12, Apple Watch Series 9, 399.99
+13, Samsung Galaxy Watch 6, 299.99
+14, Fitbit Charge 6, 159.99
+15, Garmin Forerunner 265, 449.99
+16, Sony WH-1000XM5, 349.99
+17, Bose QuietComfort 45, 329.99
+18, AirPods Pro 2nd Gen, 249.99
+19, Jabra Elite 85t, 179.99
+20, Beats Studio Pro, 349.99
+21, Amazon Echo Dot, 49.99
+22, Google Nest Hub, 99.99
+23, Apple HomePod Mini, 99.99
+24, Roku Streaming Stick 4K, 49.99
+25, Amazon Fire TV Stick 4K, 39.99
+26, Nintendo Switch OLED, 349.99
+27, PlayStation 5, 499.99
+28, Xbox Series X, 499.99
+29, Steam Deck 512GB, 649.99
+30, Oculus Quest 3, 499.99
+31, Canon EOS R50, 679.99
+32, Sony Alpha a6700, $1399.99
+33, Nikon Z30, 799.99
+34, GoPro Hero 12, 399.99
+35, DJI Mini 4 Pro, 759.99
+36, Ring Video Doorbell, 99.99
+37, Nest Learning Thermostat, 249.99
+38, Philips Hue Starter Kit, 179.99
+39, TP-Link WiFi 6 Router, 129.99
+40, Netgear Nighthawk, 199.99
+41, Samsung 55" QLED TV, 799.99
+42, LG C3 65" OLED TV, 1799.99
+43, Sony Bravia 75", 1499.99
+44, TCL 50" 4K TV, 349.99
+45, Hisense 43" 4K TV, 249.99
+46, Epson EcoTank ET-4850, 349.99
+47, HP OfficeJet Pro 9015e, 229.99
+48, Canon PIXMA TR8620, 149.99
+49, Brother MFC-L8900CDW, 549.99
+50, Western Digital 4TB HDD, $89.99
+51, Seagate 2TB Portable, 59.99
+52, Samsung 1TB SSD, 89.99
+53, WD Black SN850X 2TB, 149.99
+54, Corsair Vengeance 32GB RAM, 74.99
+55, Crucial 16GB DDR5, 49.99
+56, ASUS ROG Gaming Mouse, 79.99
+57, Logitech MX Master 3, 99.99
+58, Razer BlackWidow Keyboard, 139.99
+59, Corsair K95 Keyboard,  $199.99
+60, BenQ 27" 4K Monitor, 599.99
+61, LG 32" UltraWide, 449.99
+62, Dell 27" Gaming Monitor, 379.99
+63, Asus ROG Swift 32", 699.99
+64, Anker 20000mAh Power Bank, 45.99
+65, Belkin MagSafe Charger, 39.99
+66, USB-C Hub 7-in-1, 29.99
+67, Amazon Basics HDMI Cable, 9.99
+68, Surge Protector 12-Outlet, 34.99
+69, APC UPS 1500VA, 229.99
+70, Dyson V15 Vacuum, 749.99
+71,  iRobot Roomba j7+, 599.99
+72, Shark IQ Robot, 399.99
+73, Bissell CrossWave, 279.99
+74, Instant Pot Duo 7-in-1, 99.99
+75, Ninja Foodi Air Fryer, 159.99
+76, KitchenAid Stand Mixer, 449.99
+77, Keurig K-Elite, 169.99
+78, Breville Espresso Machine, $699.99
+79, Vitamix E310, 449.99
+80, Nespresso Vertuo Pop, 89.99
+81, Cuisinart Food Processor, 199.99
+82, Lodge Cast Iron Skillet, 34.99
+83, All-Clad Stainless Set, 699.99
+84, Hydro Flask 32oz, 44.95
+85, Yeti Rambler 20oz, 34.99
+86, Fossil Gen 6 Smartwatch, 299.99
+87, Tile Mate 4-Pack, 59.99
+88, Theragun Prime, 299.99
+89, Peloton Bike+, $2495.00
+90, Bowflex SelectTech 552, 449.99
+91, Resistance Bands Set, 24.99
+92, Yoga Mat Premium, 79.99
+93, Jump Rope Speed, 14.99
+94, Lego Technic Set, 129.99
+95, Monopoly Board Game, 19.99
+96, Kindle Paperwhite 16GB, 159.99
+97, Audible Gift Card $25, 25.00
+98, Spotify Gift Card $30, 30.00
+99, Netflix Gift Card $50, 50.00
+100, Google Play Card $25, 25.00

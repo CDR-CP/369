@@ -1,0 +1,100 @@
+1, Bed Bath Beyond, 7277 Sherman Ct., San Diego, 92101, CA, 454-430-2049
+2, Belk, 5639 Oak Pkwy, Atlanta, 30301, GA, 436 802 4608
+3, Walgreens, 217 Pine St, Charlotte, 28201, NC, 270.232.6413
+4,  TJ Maxx,  1260 Grant Drive, Seattle, 98101, WA,886-697-4510
+5, Express, 8934 Lake Pkwy., Omaha, 68101, NE, 685 448 8749
+6, Michaels, 6769 Spring Ave, San Antonio, 78201, TX, 875-641-6804
+7, New Balance, 7039 Liberty Court, Honolulu, 96801, HI, 256 889 2612
+8, Bath & Body Works, 1093 Union Ln., San Antonio, 78201, TX, 455 396 4116
+9, Samsung, 8886 Lincoln Blvd, Baltimore, 21201, MD, 388-485-8579
+10, Joann, 4192 Pine Ct, Atlanta, 30301, GA, 301 251 9856
+11, Safeway, 341 Elm Drive, Austin, 78701, TX, 617-697-8886
+12, Nike, 3602 Union St., Austin, 78701, TX, 589.202.7396
+13, Ashley Furniture, 4445 Madison Road, Baltimore, 21201, MD, 914 948 8973
+14, Subway, 2636 Spring Road, Columbus, 43201, OH, 260-793-9883
+15, Burlington, 1098 Fairview ST, Houston, 77001, TX, 799.688.9238
+16, Home Depot, 8801 River ST, Sacramento, 95801, CA, 283.390.2122
+17, Sally Beauty, 9849 Pine Dr, Memphis, 38101, TN, 323-783-5033
+18, H&M, 9585 Birch Street, Virginia Beach, 23451, VA, (284) 629-9565
+19, Sprint, 5283 Ridge Drive, Tampa, 33601, FL, (934) 521-4910
+20, Walmart, 4451 Union Blvd, Tampa, 33601, FL, 861 507 8491
+21, Petco, 5280 Pine St., Albuquerque, 87101, NM, 837.776.2638
+22,Regis, 1300 Franklin Dr.,Sacramento,95801,  CA,  (472) 335-6718
+23, Burlington, 1227 Valley Lane, Denver, 80201, CO, 362.648.9900
+24, Neiman Marcus,  5056 Spruce Place,  New York,10001,NY, (884) 767-5905
+25, Abercrombie, 1797 Lake Rd, San Diego, 92101, CA, 310.960.3546
+26, Abercrombie, 4562 Willow Parkway, Columbus, 43201, OH, (935) 551-4335
+27,  AC Moore,  4425 Grant Ct., San Francisco,94101, CA,  253.294.7939
+28, JCPenney, 4633 Maple St, El Paso, 79901, TX, 334-852-5291
+29, Costco, 2747 Lincoln Pl, Bakersfield, 93301, CA, 638-774-1158
+30, Banana Republic, 1932 Pine BLVD, Kansas City, 64101, MO, 237 578 3426
+31, Aldi, 7141 Lake ST, Nashville, 37201, TN, 574.240.6862
+32, Starbucks, 3541 Valley AVE, Washington, 20001, DC, 774.616.3532
+33, Blick Art, 3978 River Boulevard, Portland, 97201, OR, (226) 383-6442
+34, Finish Line, 6845 Poplar Dr, Seattle, 98101, WA, 364 918 2771
+35,Macy's, 6367 Maple Ct,  Charlotte,  28201, NC, 405-671-6728
+36, Jo-Ann Fabric, 5100 Forest Dr., Los Angeles, 90001, CA, 876.397.7528
+37, Macy's, 5478 Brook Avenue, Santa Ana, 92701, CA, 486-559-9346
+38, Old Navy, 6648 Franklin Lane, Los Angeles, 90001, CA, 319 467 3925
+39, Academy Sports, 9612 Ridge ST, San Antonio, 78201, TX, (811) 644-6663
+40, Domino's, 5239 Jefferson Pkwy, Sacramento, 95801, CA, (319) 594-4114
+41, Pottery Barn,  4273 Maple Way, New York, 10001,  NY,733-751-4228
+42, CompUSA,6067 Jefferson Ave, Tampa,  33601,FL, 539 838 6143
+43, Cabela's, 2141 Highland Pl, Nashville, 37201, TN, 883-618-6344
+44, Whole Foods, 6692 Willow Pl, Dallas, 75201, TX, 397.630.7211
+45, T-Mobile, 2951 Spruce Parkway, Nashville, 37201, TN, 616.761.1006
+46, Trader Joe's, 5078 Willow Dr, Baltimore, 21201, MD, (794) 821-6279
+47, Best Buy, 7718 Lincoln Ct., New Orleans, 70112, LA, (419) 723-8752
+48, AT&T, 2880 Poplar Ave, Denver, 80201, CO, 728-879-6491
+49, Nordstrom, 1630 Valley Rd., Charlotte, 28201, NC, 404.350.1400
+50, Sony, 857 Valley Court, Virginia Beach, 23451, VA, 987-274-8461
+51, Victoria's Secret, 6890 Magnolia Pkwy, Fort Worth, 76101, TX, 936.913.7291
+52, AC Moore, 8199 Union Drive, San Jose, 95101, CA, 872 904 1090
+53, Staples, 1846 Jefferson Dr., Jacksonville, 32201, FL, 913 730 8611
+54, Gap, 922 Chestnut Dr., San Diego, 92101, CA, 668.336.8612
+55, Rooms To Go, 8802 Chestnut Pkwy., Oklahoma City, 73101, OK, 974-653-9270
+56, Kohl's, 7091 Chestnut Court, Austin, 78701, TX, 962.686.8373
+57, AT&T, 4346 Valley Road, Santa Ana, 92701, CA, 734-696-4919
+58, Best Buy, 4599 Lincoln AVE, Bakersfield, 93301, CA, 493-440-5451
+59, Micro Center, 5602 Fairview Pl., Philadelphia, 19101, PA, 342.354.4788
+60, McDonald's, 6375 Hill Dr, Phoenix, 85001, AZ, 625.617.6421
+61, Kroger, 8990 Madison Way, Houston, 77001, TX, 412.630.7381
+62, Dillard's, 9669 Oak Parkway, Louisville, 40201, KY, 689.206.6763
+63, Dollar Tree, 4992 Center WAY, Kansas City, 64101, MO, 966 952 9947
+64, Microsoft Store, 9983 Forest Ct, Charlotte, 28201, NC, (480) 646-8956
+65, Uniqlo, 575 Center Ln, Tampa, 33601, FL, (896) 614-3704
+66, Office Depot, 7757 Lake Parkway, Kansas City, 64101, MO, 228 603 1444
+67, Lowe's, 1475 Sycamore WAY, Dallas, 75201, TX, 673 386 1823
+68, Bass Pro, 4362 Center Ln, Columbus, 43201, OH, (666) 534-6529
+69, Domino's, 6311 Brook Way, San Francisco, 94101, CA, (284) 681-1317
+70, Cabela's, 8937 Cedar Ln., Charlotte, 28201, NC, 866.270.1659
+71, Staples, 608 Valley Drive, Los Angeles, 90001, CA, (837) 356-4908
+72, Lowe's, 2168 Adams Ave, Omaha, 68101, NE, 424-676-5198
+73, Ross, 6143 River Pkwy, Raleigh, 27601, NC, 966 935 2876
+74, Belk, 2783 Highland AVE, Colorado Springs, 80901, CO, 227-519-7149
+75, Kohl's, 6598 Spring AVE, Colorado Springs, 80901, CO, 908.842.4978
+76,H&M,1769 Highland Parkway, San Diego,92101,CA, 780-242-6688
+77, Verizon, 8828 Jefferson Ln., Phoenix, 85001, AZ, 719-863-6590
+78, IKEA, 307 Liberty Ct, San Antonio, 78201, TX, 644 570 8532
+79, TJ Maxx, 2606 Jefferson Boulevard, Honolulu, 96801, HI, 735-866-5425
+80, Marshalls, 8917 Adams Ct., Baltimore, 21201, MD, 949.806.5397
+81, Nordstrom, 5380 Valley Ave., Seattle, 98101, WA, 662 449 8613
+82, Subway, 9436 Spruce WAY, El Paso, 79901, TX, (230) 706-6325
+83, La-Z-Boy, 3079 Monroe Drive, Washington, 20001, DC, (465) 548-5581
+84, Marshalls, 9867 Brook Place, New York, 10001, NY, 730-395-2402
+85, Ulta Beauty, 4054 Liberty Court, Atlanta, 30301, GA, 977 446 8800
+86, GameStop, 8141 Lincoln St., Philadelphia, 19101, PA, 502 426 7625
+87, Forever 21, 4086 Highland Pkwy, Las Vegas, 89101, NV, 685-766-9698
+88, PetSmart, 5732 Jefferson Place, El Paso, 79901, TX, 561 919 8434
+89, Academy Sports, 4538 Highland Rd., Charlotte, 28201, NC, (324) 938-4155
+90, Forever 21, 5269 Park Pl, Aurora, 80010, CO, 907 389 4138
+91, Dollar General, 3645 Adams Rd., Honolulu, 96801, HI, 804 978 9595
+92, REI, 9877 Willow AVE, Fort Worth, 76101, TX, 504 432 6912
+93, DSW, 3039 Highland St, Bakersfield, 93301, CA, (747) 329-5494
+94, JCPenney, 845 Cedar Place, Denver, 80201, CO, 915-329-9042
+95, Sprint, 1780 Main Pkwy., Denver, 80201, CO, (681) 690-8216
+96, Foot Locker, 5682 Sunset St., San Francisco, 94101, CA, 690.316.2070
+97, Pizza Hut, 6665 Monroe Ave., Omaha, 68101, NE, (845) 902-1878
+98, Walmart, 2585 Hill Pkwy, Nashville, 37201, TN, (288) 454-2940
+99, Pier 1, 9243 Liberty Pkwy, Raleigh, 27601, NC, 834-431-9561
+100, Micro Center, 6332 Lincoln Ct, Nashville, 37201, TN, 803.639.6003
