@@ -12,69 +12,82 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class Salesbyday {
-
     // MAPPER
+    // Input:  each line of sales.txt
+    // Format: saleID, date, time, storeID, customerID
+    // Output: (date, 1) for each sale
     public static class MyMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
+
+        private static final IntWritable ONE = new IntWritable(1);
+        private final Text dateKey = new Text();
 
         @Override
         public void map(LongWritable key, Text value, Context context)
                 throws IOException, InterruptedException {
 
             String line = value.toString().trim();
-            if (line.length() == 0) return;
+            if (line.isEmpty()) return;
 
             String[] parts = line.split(",");
-
             if (parts.length < 2) return;
 
+            // replace '/' with '-' 
             String date = parts[1].trim().replace("/", "-");
+            if (date.isEmpty()) return;
 
-            context.write(new Text(date), new IntWritable(1));
+            dateKey.set(date);
+            context.write(dateKey, ONE);
         }
     }
 
-    //REDUCER 
+    // REDUCER aLso used as Combiner when --combiner flag is passed
+    // Input:  (date, [1, 1, 1, ...]
+    // Output: (date, total count)
+   
     public static class MyReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+
+        private final IntWritable result = new IntWritable();
 
         @Override
         public void reduce(Text key, Iterable<IntWritable> values, Context context)
                 throws IOException, InterruptedException {
 
             int total = 0;
-
             for (IntWritable value : values) {
                 total += value.get();
             }
 
-            context.write(key, new IntWritable(total));
+            result.set(total);
+            context.write(key, result);
         }
     }
 
-    // DRIVER 
+    
     public static void main(String[] args) throws Exception {
 
         if (args.length < 2) {
-            System.out.println("Usage: Salesbyday <input> <output> [combiner]");
+            System.err.println("Usage: Salesbyday <input_path> <output_path> [combiner]");
             System.exit(1);
         }
 
         Configuration conf = new Configuration();
-        Job job = Job.getInstance(conf, "sales by day");
+        Job job = Job.getInstance(conf, "Sales By Day");
 
         job.setJarByClass(Salesbyday.class);
-
         job.setMapperClass(MyMapper.class);
-
-        // Optional combiner
-        if (args.length == 3 && args[2].equals("combiner")) {
-            job.setCombinerClass(MyReducer.class);
-        }
-
         job.setReducerClass(MyReducer.class);
+
+    
+        boolean useCombiner = (args.length == 3 && args[2].equalsIgnoreCase("combiner"));
+        if (useCombiner) {
+            job.setCombinerClass(MyReducer.class);
+            System.out.println("Combiner enabled.");
+        } else {
+            System.out.println("Combiner NOT enabled.");
+        }
 
         job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(IntWritable.class);
-
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
 
@@ -82,9 +95,7 @@ public class Salesbyday {
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         long start = System.currentTimeMillis();
-
         boolean success = job.waitForCompletion(true);
-
         long end = System.currentTimeMillis();
 
         System.out.println("MapReduce runtime: " + (end - start) + " ms");
