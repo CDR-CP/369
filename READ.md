@@ -76,3 +76,10 @@ hadoop fs -cat /user/croger31/output/part-r-00000
 - Always rm -r /user/croger31/output before re-running any MapReduce job
 - Plain Java reads from local filesystem, MapReduce reads from HDFS
 - Lab 2 and Lab 3 both use sales.txt, Lab 4 uses products.txt
+
+
+
+
+ssh croger31@ambari-node5.csc.calpoly.edu
+cd /home/croger31
+git clone REPO
