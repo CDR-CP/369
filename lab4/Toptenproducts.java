@@ -4,6 +4,7 @@ import java.util.*;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
@@ -13,7 +14,33 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class TopTenProducts {
 
-    // strip $ and parse price, returns -1 if it fails
+    public static class Record implements Comparable<Record> {
+
+        private int id;
+        private String name;
+        private double price;
+
+        public Record(int id, String name, double price) {
+            this.id    = id;
+            this.name  = name;
+            this.price = price;
+        }
+
+        @Override
+        public String toString() {
+            return id + "," + name + "," + String.format("%.2f", price);
+        }
+
+        @Override
+        public int compareTo(Record other) {
+            if (this.price > other.price) return -1;
+            if (this.price < other.price) return 1;
+            if (this.id > other.id) return 1;
+            if (this.id < other.id) return -1;
+            return 0;
+        }
+    }
+
     private static double parsePrice(String raw) {
         try {
             return Double.parseDouble(raw.trim().replace("$", ""));
@@ -22,12 +49,16 @@ public class TopTenProducts {
         }
     }
 
-    // mapper emits a constant key so all records go to one reducer
-    // value is "price,productID,name"
-    public static class MyMapper extends Mapper<LongWritable, Text, Text, Text> {
+    public static class MyMapper extends Mapper<LongWritable, Text, NullWritable, Text> {
 
-        private final Text constantKey = new Text("top10");
-        private final Text outValue    = new Text();
+        public static final int DEFAULT_N = 10;
+        private int n = DEFAULT_N;
+        private TreeSet<Record> top = new TreeSet<>();
+
+        @Override
+        protected void setup(Context context) throws IOException, InterruptedException {
+            this.n = context.getConfiguration().getInt("N", DEFAULT_N);
+        }
 
         @Override
         public void map(LongWritable key, Text value, Context context)
@@ -36,65 +67,58 @@ public class TopTenProducts {
             String line = value.toString().trim();
             if (line.isEmpty()) return;
 
-            // split into 3 parts max since name may contain commas
             String[] parts = line.split(",", 3);
             if (parts.length < 3) return;
 
-            String productId = parts[0].trim();
-            String name      = parts[1].trim();
-            double price     = parsePrice(parts[2]);
-
+            double price = parsePrice(parts[2]);
             if (price < 0) return;
 
-            outValue.set(price + "," + productId + "," + name);
-            context.write(constantKey, outValue);
+            top.add(new Record(Integer.parseInt(parts[0].trim()), parts[1].trim(), price));
+
+            if (top.size() > n) top.remove(top.last());
         }
-    }
-
-    // reducer gets all products, keeps top 10 by price using a TreeMap
-    public static class MyReducer extends Reducer<Text, Text, Text, Text> {
-
-        private final Text outKey   = new Text();
-        private final Text outValue = new Text();
 
         @Override
-        public void reduce(Text key, Iterable<Text> values, Context context)
-                throws IOException, InterruptedException {
-
-            // TreeMap sorted by price ascending, we trim to top 10
-            TreeMap<Double, String> topTen = new TreeMap<>();
-
-            for (Text val : values) {
-                String[] parts = val.toString().split(",", 3);
-                if (parts.length < 3) continue;
-
-                double price     = Double.parseDouble(parts[0]);
-                String productId = parts[1];
-                String name      = parts[2];
-
-                topTen.put(price, productId + "\t" + name);
-
-                // only keep top 10
-                if (topTen.size() > 10) topTen.pollFirstEntry();
-            }
-
-            // write in descending order
-            List<Map.Entry<Double, String>> entries = new ArrayList<>(topTen.entrySet());
-            for (int i = entries.size() - 1; i >= 0; i--) {
-                double price     = entries.get(i).getKey();
-                String[] product = entries.get(i).getValue().split("\t", 2);
-                outKey.set(product[0] + "\t" + product[1]);
-                outValue.set(String.format("%.2f", price));
-                context.write(outKey, outValue);
+        protected void cleanup(Context context) throws IOException, InterruptedException {
+            for (Record r : top) {
+                context.write(NullWritable.get(), new Text(r.toString()));
             }
         }
     }
 
-    // Usage:
-    //   hadoop jar TopTenProducts.jar TopTenProducts <input_path> <output_path>
-    //
-    // Example:
-    //   hadoop jar TopTenProducts.jar TopTenProducts /user/lubo/input/products /user/lubo/output
+    public static class MyReducer extends Reducer<NullWritable, Text, NullWritable, Text> {
+
+        private int n = MyMapper.DEFAULT_N;
+        private SortedSet<Record> top = new TreeSet<>();
+
+        //taken from slides 
+        @Override
+        protected void setup(Context context) throws IOException, InterruptedException {
+            this.n = context.getConfiguration().getInt("N", MyMapper.DEFAULT_N);
+        }
+
+        @Override
+        public void reduce(NullWritable key, Iterable<Text> values, Context context)
+                throws IOException, InterruptedException {
+
+            for (Text value : values) {
+                String[] parts = value.toString().trim().split(",", 3);
+                if (parts.length < 3) continue;
+
+                double price = parsePrice(parts[2]);
+                if (price < 0) continue;
+
+                top.add(new Record(Integer.parseInt(parts[0].trim()), parts[1].trim(), price));
+
+                if (top.size() > n) top.remove(top.last());
+            }
+
+            for (Record r : top) {
+                context.write(NullWritable.get(), new Text(r.toString()));
+            }
+        }
+    }
+
     public static void main(String[] args) throws Exception {
 
         if (args.length < 2) {
@@ -102,19 +126,22 @@ public class TopTenProducts {
             System.exit(1);
         }
 
+        int n = 10;
+
         Configuration conf = new Configuration();
+        conf.setInt("N", n);
+
         Job job = Job.getInstance(conf, "Top Ten Products");
 
         job.setJarByClass(TopTenProducts.class);
         job.setMapperClass(MyMapper.class);
         job.setReducerClass(MyReducer.class);
 
-        // single reducer so output is globaly sorted
         job.setNumReduceTasks(1);
 
-        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputKeyClass(NullWritable.class);
         job.setMapOutputValueClass(Text.class);
-        job.setOutputKeyClass(Text.class);
+        job.setOutputKeyClass(NullWritable.class);
         job.setOutputValueClass(Text.class);
 
         FileInputFormat.addInputPath(job, new Path(args[0]));

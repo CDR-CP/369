@@ -1,17 +1,70 @@
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class SalesByDayDetail {
+
+    public static class DateTimeKey implements WritableComparable<DateTimeKey> {
+
+        private String date;
+        private String time;
+
+        public DateTimeKey() {
+            this.date = "";
+            this.time = "";
+        }
+
+        public DateTimeKey(String date, String time) {
+            this.date = date;
+            this.time = time;
+        }
+
+        public String getDate() { return date; }
+        public String getTime() { return time; }
+
+        @Override
+        public void write(DataOutput out) throws IOException {
+            out.writeUTF(date);
+            out.writeUTF(time);
+        }
+
+        @Override
+        public void readFields(DataInput in) throws IOException {
+            date = in.readUTF();
+            time = in.readUTF();
+        }
+
+        @Override
+        public int compareTo(DateTimeKey other) {
+            int cmp = this.date.compareTo(other.date);
+            if (cmp != 0) return cmp;
+            return this.time.compareTo(other.time);
+        }
+
+        @Override
+        public String toString() {
+            return date + "\t" + time;
+        }
+    }
+
+    public static class DatePartitioner extends Partitioner<DateTimeKey, Text> {
+
+        @Override
+        public int getPartition(DateTimeKey key, Text value, int numPartitions) {
+            return Math.abs(key.getDate().hashCode()) % numPartitions;
+        }
+    }
 
     private static String normalizeDate(String raw) {
         return raw.trim().replace("/", "-");
@@ -34,10 +87,9 @@ public class SalesByDayDetail {
         return raw;
     }
 
-    public static class MyMapper extends Mapper<LongWritable, Text, Text, Text> {
+    public static class MyMapper extends Mapper<LongWritable, Text, DateTimeKey, Text> {
 
-        private final Text dateKey   = new Text();
-        private final Text timeValue = new Text();
+        private final Text outValue = new Text();
 
         @Override
         public void map(LongWritable key, Text value, Context context)
@@ -49,41 +101,34 @@ public class SalesByDayDetail {
             String[] parts = line.split(",");
             if (parts.length < 3) return;
 
-            String saleId = parts[0].trim();
-            String date   = normalizeDate(parts[1]);
-            String time   = normalizeTime(parts[2]);
+            String id   = parts[0].trim();
+            String date = normalizeDate(parts[1]);
+            String time = normalizeTime(parts[2]);
 
-            dateKey.set(date);
-            timeValue.set(time + "," + saleId);
-            context.write(dateKey, timeValue);
+            // key is date+time, value is time+saleId
+            outValue.set(time + " " + id);
+            context.write(new DateTimeKey(date, time), outValue);
         }
     }
 
-    public static class MyReducer extends Reducer<Text, Text, Text, Text> {
+    public static class MyReducer extends Reducer<DateTimeKey, Text, Text, Text> {
 
-        private final Text result = new Text();
+        private final Text outKey = new Text();
+        private final Text outVal = new Text();
 
         @Override
-        public void reduce(Text key, Iterable<Text> values, Context context)
+        public void reduce(DateTimeKey key, Iterable<Text> values, Context context)
                 throws IOException, InterruptedException {
 
-            TreeMap<String, String> timeToSale = new TreeMap<>();
-
-            for (Text val : values) {
-                String[] parts = val.toString().split(",", 2);
-                if (parts.length == 2) {
-                    timeToSale.put(parts[0], parts[1]);
-                }
-            }
-
             StringBuilder sb = new StringBuilder();
-            for (Map.Entry<String, String> entry : timeToSale.entrySet()) {
+            for (Text val : values) {
                 if (sb.length() > 0) sb.append(", ");
-                sb.append(entry.getKey()).append(" ").append(entry.getValue());
+                sb.append(val.toString());
             }
 
-            result.set(sb.toString());
-            context.write(key, result);
+            outKey.set(key.getDate());
+            outVal.set(sb.toString());
+            context.write(outKey, outVal);
         }
     }
 
@@ -99,9 +144,10 @@ public class SalesByDayDetail {
 
         job.setJarByClass(SalesByDayDetail.class);
         job.setMapperClass(MyMapper.class);
+        job.setPartitionerClass(DatePartitioner.class);
         job.setReducerClass(MyReducer.class);
 
-        job.setMapOutputKeyClass(Text.class);
+        job.setMapOutputKeyClass(DateTimeKey.class);
         job.setMapOutputValueClass(Text.class);
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
