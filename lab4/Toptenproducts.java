@@ -125,7 +125,7 @@ public class TopTenProducts {
             System.err.println("Usage: TopTenProducts <input_path> <output_path>");
             System.exit(1);
         }
-
+        // top 10 values 
         int n = 10;
 
         Configuration conf = new Configuration();

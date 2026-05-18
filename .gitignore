@@ -1,0 +1,6 @@
+*.class
+output/
+output_combiner/
+output_lab2/
+output_lab3/
+output_lab4/
