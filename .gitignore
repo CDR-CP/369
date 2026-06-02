@@ -5,4 +5,9 @@ output/
 output_combiner/
 output_lab2/
 output_lab3/
-output_lab4/
+output_lab4/target/
+project/target/
+*.jar
+*.class
+java_output.txt
+output_lab5.txt
